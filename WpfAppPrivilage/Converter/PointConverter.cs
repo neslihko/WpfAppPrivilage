@@ -1,20 +1,24 @@
-﻿using Newtonsoft.Json;
-using System;
-
-using System.Windows;
-
-namespace WpfAppPrivilage
+﻿namespace WpfAppPrivilage
 {
-    public class PointConverter :  JsonConverter<Point>
+    using Newtonsoft.Json;
+
+    using System;
+
+    using System.Windows;
+
+    public class PointConverter : JsonConverter<Point>
     {
         public override Point ReadJson(JsonReader reader, Type objectType, Point existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            string pointString = reader.Value.ToString();
-            string[] coordinates = pointString.Split(';');
+            var pointString = reader.Value?.ToString();
+            var coordinates = pointString?.Split(';');
 
-            if (coordinates.Length != 2 || !double.TryParse(coordinates[0], out double x) || !double.TryParse(coordinates[1], out double y))
+            if (coordinates == null ||
+                coordinates.Length != 2 ||
+                !double.TryParse(coordinates[0].Trim(), out double x) ||
+                !double.TryParse(coordinates[1].Trim(), out double y))
             {
-                throw new JsonSerializationException($"Invalid point format: {pointString}");
+                throw new JsonSerializationException($"Invalid point format: {pointString}. Try using ; as a separator.");
             }
 
             return new Point(x, y);
@@ -24,9 +28,5 @@ namespace WpfAppPrivilage
         {
             throw new NotImplementedException();
         }
-
-
     }
-
-
 }

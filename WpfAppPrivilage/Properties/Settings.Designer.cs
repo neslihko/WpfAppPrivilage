@@ -25,7 +25,7 @@ namespace WpfAppPrivilage.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Projects\\Demo\\WpfAppPrivilage\\WpfAppPrivilage\\Path")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Projects\\Demo\\WpfAppPrivilage\\WpfAppPrivilage\\path\\")]
         public string FilePath {
             get {
                 return ((string)(this["FilePath"]));
@@ -34,7 +34,7 @@ namespace WpfAppPrivilage.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("file.json")]
+        [global::System.Configuration.DefaultSettingValueAttribute("shapes.json")]
         public string FileName {
             get {
                 return ((string)(this["FileName"]));

@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="FilePath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Projects\Demo\WpfAppPrivilage\WpfAppPrivilage\Path</Value>
+      <Value Profile="(Default)">C:\Projects\Demo\WpfAppPrivilage\WpfAppPrivilage\path\</Value>
     </Setting>
     <Setting Name="FileName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">file.json</Value>
+      <Value Profile="(Default)">shapes.json</Value>
     </Setting>
   </Settings>
 </SettingsFile>

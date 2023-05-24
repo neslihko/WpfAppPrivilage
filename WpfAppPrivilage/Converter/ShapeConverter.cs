@@ -1,42 +1,31 @@
-﻿using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System;
-using NPOI.SS.Formula.Functions;
-using WpfAppPrivilage;
-
-namespace WpfAppPrivilage
+﻿namespace WpfAppPrivilage
 {
+    using Newtonsoft.Json.Linq;
+    using Newtonsoft.Json;
+    using System;
+
     public class ShapeConverter : JsonConverter<Shape>
     {
-     
-
-      
-
         public override Shape? ReadJson(JsonReader reader, Type objectType, Shape? existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
+            var jsonObject = JObject.Load(reader);
 
-            JObject jsonObject = JObject.Load(reader);
+            if (jsonObject == null)
+            {
+                return null;
+            }
 
             // Determine the concrete type based on the "type" property in JSON
-            string shapeType = jsonObject["type"].ToString();
+            var shapeType = jsonObject["type"]?.ToString();
 
             // Create an instance of the concrete type
-            Shape shape;
-            switch (shapeType)
+            Shape shape = shapeType switch
             {
-                case "line":
-                    shape = new Line();
-                    break;
-                case "circle":
-                    shape = new Circle();
-                    break;
-                case "triangle":
-                    shape = new Triangle();
-                    break;
-
-                default:
-                    throw new NotSupportedException($"Shape type '{shapeType}' is not supported.");
-            }
+                "line" => new Line(),
+                "circle" => new Circle(),
+                "triangle" => new Triangle(),
+                _ => throw new NotSupportedException($"Shape type '{shapeType}' is not supported."),
+            };
 
             // Populate the properties of the shape object
             serializer.Populate(jsonObject.CreateReader(), shape);
